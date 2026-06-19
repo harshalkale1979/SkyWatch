@@ -3,225 +3,413 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SkyWatch | Weather & Aviation</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-<div class="stars"></div>
-    background:#0b1220;
-    color:white;
-    line-height:1.6;
+background:#050816;
+color:white;
+overflow-x:hidden;
 }
 
-header{
-    background:linear-gradient(135deg,#1e3a8a,#0ea5e9);
-    padding:80px 20px;
-    text-align:center;
+/* Animated Stars */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+background:
+radial-gradient(white 1px, transparent 1px);
+background-size:40px 40px;
+opacity:.15;
+z-index:-1;
+animation:starsMove 80s linear infinite;
 }
 
-header h1{
-    font-size:3rem;
+@keyframes starsMove{
+from{
+transform:translateY(0);
+}
+to{
+transform:translateY(-1200px);
+}
 }
 
-header p{
-    margin-top:10px;
-    font-size:1.2rem;
-}
+/* Navigation */
 
 nav{
-    background:#111827;
-    padding:15px;
-    text-align:center;
-    position:sticky;
-    top:0;
+position:fixed;
+top:0;
+width:100%;
+padding:20px;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:center;
+gap:30px;
+z-index:1000;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+font-weight:bold;
 }
 
+/* Hero */
+
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero-content h1{
+font-size:5rem;
+letter-spacing:6px;
+}
+
+.sky{
+color:#38bdf8;
+}
+
+.watch{
+color:white;
+}
+
+.hero-content p{
+margin-top:15px;
+font-size:1.3rem;
+}
+
+.btn{
+display:inline-block;
+margin-top:30px;
+padding:15px 30px;
+background:#0ea5e9;
+color:white;
+text-decoration:none;
+border-radius:40px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-5px);
+}
+
+/* Sections */
+
 section{
-    padding:60px 10%;
+padding:100px 10%;
 }
 
 h2{
-    margin-bottom:20px;
-    color:#38bdf8;
+text-align:center;
+margin-bottom:40px;
+color:#38bdf8;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:#1f2937;
-    padding:20px;
-    border-radius:12px;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
+/* Weather Box */
 
 .weather-box{
-    background:#1e293b;
-    padding:20px;
-    border-radius:12px;
-    text-align:center;
+max-width:500px;
+margin:auto;
+padding:30px;
+text-align:center;
+
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
 }
 
 .temp{
-    font-size:3rem;
-    color:#38bdf8;
-}
-
-.flight{
-    background:#1f2937;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-footer{
-    text-align:center;
-    padding:30px;
-    background:#111827;
+font-size:4rem;
+margin-bottom:15px;
 }
 
 button{
-    background:#0ea5e9;
-    border:none;
-    padding:10px 20px;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
+padding:12px 25px;
+background:#0ea5e9;
+border:none;
+color:white;
+border-radius:30px;
+cursor:pointer;
+margin-top:20px;
 }
 
-button:hover{
-    background:#0284c7;
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px rgba(56,189,248,.3);
+}
+
+.card h3{
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+/* Clock */
+
+.clock{
+text-align:center;
+font-size:2rem;
+margin-top:20px;
+color:#38bdf8;
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:40px;
+background:#0a0f1f;
+margin-top:50px;
+}
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:3rem;
+}
+
+.hero-content p{
+font-size:1rem;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<header>
-    <h1>🌦️ SkyWatch ✈️</h1>
-    <p>Weather • Aircraft • Space • Technology</p>
-</header>
+<div class="stars"></div>
 
 <nav>
-    <a href="#weather">Weather</a>
-    <a href="#aviation">Aviation</a>
-    <a href="#space">Space</a>
-    <a href="#about">About</a>
+<a href="#weather">Weather</a>
+<a href="#aviation">Aviation</a>
+<a href="#space">Space</a>
+<a href="#about">About</a>
 </nav>
 
-<section id="weather">
-    <h2>Current Weather</h2>
+<section class="hero">
 
-    <div class="weather-box">
-        <div class="temp" id="temp">--°C</div>
-        <p id="condition">Loading...</p>
-        <br>
-        <button onclick="getWeather()">Get My Weather</button>
-    </div>
+<div class="hero-content">
+
+<h1>
+✈️ <span class="sky">SKY</span><span class="watch">WATCH</span>
+</h1>
+
+<p>
+Weather • Aviation • Space • Technology
+</p>
+
+<div class="clock" id="clock"></div>
+
+<a href="#weather" class="btn">
+Explore Sky Data
+</a>
+
+</div>
+
+</section>
+
+<section id="weather">
+
+<h2>Current Weather</h2>
+
+<div class="weather-box">
+
+<div class="temp" id="temp">--°C</div>
+
+<p id="condition">
+Click below to get your weather
+</p>
+
+<button onclick="getWeather()">
+Get My Weather
+</button>
+
+</div>
+
 </section>
 
 <section id="aviation">
-    <h2>Aircraft Facts</h2>
 
-    <div class="cards">
-        <div class="card">
-            <h3>Boeing 747</h3>
-            <p>The iconic jumbo jet that revolutionized long-distance travel.</p>
-        </div>
+<h2>Aircraft Gallery</h2>
 
-        <div class="card">
-            <h3>Airbus A320</h3>
-            <p>One of the world's most popular commercial aircraft.</p>
-        </div>
+<div class="cards">
 
-        <div class="card">
-            <h3>Rafale</h3>
-            <p>Advanced multirole fighter aircraft used by the Indian Air Force.</p>
-        </div>
-    </div>
+<div class="card">
+<h3>✈ Boeing 747</h3>
+<p>
+The legendary jumbo jet that changed global air travel.
+</p>
+</div>
+
+<div class="card">
+<h3>🛩 Airbus A320</h3>
+<p>
+One of the most successful commercial aircraft ever built.
+</p>
+</div>
+
+<div class="card">
+<h3>⚡ Rafale</h3>
+<p>
+Modern multirole fighter aircraft used by India.
+</p>
+</div>
+
+</div>
+
 </section>
 
 <section id="space">
-    <h2>Space Corner</h2>
 
-    <div class="cards">
-        <div class="card">
-            <h3>🚀 ISRO</h3>
-            <p>India's space agency responsible for Chandrayaan and Mars missions.</p>
-        </div>
+<h2>Space Corner</h2>
 
-        <div class="card">
-            <h3>🌕 Moon</h3>
-            <p>The Moon is slowly moving away from Earth at about 3.8 cm per year.</p>
-        </div>
+<div class="cards">
 
-        <div class="card">
-            <h3>🛰 Satellites</h3>
-            <p>Thousands of satellites orbit Earth providing communication and weather data.</p>
-        </div>
-    </div>
+<div class="card">
+<h3>🚀 ISRO</h3>
+<p>
+India's space agency behind Chandrayaan and Mars missions.
+</p>
+</div>
+
+<div class="card">
+<h3>🌕 Moon</h3>
+<p>
+The Moon moves away from Earth by about 3.8 cm every year.
+</p>
+</div>
+
+<div class="card">
+<h3>🛰 Satellites</h3>
+<p>
+Thousands of satellites orbit Earth providing weather and communication data.
+</p>
+</div>
+
+</div>
+
 </section>
 
 <section id="about">
-    <h2>About This Project</h2>
 
-    <p>
-        SkyWatch is a personal project built by Harshal.
-        It combines weather observation, aviation enthusiasm,
-        space exploration and technology into one website.
-    </p>
+<h2>About SkyWatch</h2>
+
+<div class="card">
+
+<p>
+Welcome to SkyWatch, a personal project by Harshal.
+This website combines weather tracking, aircraft spotting,
+space exploration and technology into one place.
+
+Future upgrades:
+<br><br>
+🌩 Storm Tracker<br>
+🛰 Satellite Viewer<br>
+✈ Flight Radar Map<br>
+🤖 AI Weather Prediction<br>
+🌧 Monsoon Monitor
+</p>
+
+</div>
+
 </section>
 
 <footer>
-    <p>Made with ❤️ by Harshal | SkyWatch</p>
+
+<p>
+Made by Harshal • SkyWatch 2026
+</p>
+
 </footer>
 
 <script>
-async function getWeather() {
 
-    if(!navigator.geolocation){
-        alert("Geolocation not supported.");
-        return;
-    }
+/* Live Clock */
 
-    navigator.geolocation.getCurrentPosition(async position => {
+setInterval(() => {
 
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
+document.getElementById("clock").innerHTML =
+new Date().toLocaleTimeString();
 
-        let url =
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+},1000);
 
-        let response = await fetch(url);
-        let data = await response.json();
+/* Weather */
 
-        document.getElementById("temp").innerText =
-        data.current_weather.temperature + "°C";
+async function getWeather(){
 
-        document.getElementById("condition").innerText =
-        "Wind Speed: " + data.current_weather.windspeed + " km/h";
-    });
+if(!navigator.geolocation){
+
+alert("Geolocation not supported");
+return;
 }
+
+navigator.geolocation.getCurrentPosition(async position => {
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+const response = await fetch(
+`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+);
+
+const data = await response.json();
+
+document.getElementById("temp").innerHTML =
+data.current_weather.temperature + "°C";
+
+document.getElementById("condition").innerHTML =
+"Wind Speed: " +
+data.current_weather.windspeed +
+" km/h";
+
+});
+
+}
+
 </script>
 
 </body>
